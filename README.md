@@ -171,26 +171,55 @@ PRIVATE_KEY_PATH=./yona_private_key.pem
 
 ## 🌐 Coral Protocol Integration
 
-Yona integrates with Coral Protocol to enable community-driven music creation:
+Yona supports two types of Coral Protocol integration:
 
-1. **Story Creation**: Automatically create Coral stories for new songs
-2. **Community Feedback**: Monitor comments for song improvement suggestions
-3. **Interactive Responses**: Reply to fan comments and engage in discussions
-4. **Feedback Processing**: Use community input to create better song versions
+### 1. **Community Integration** (GraphQL)
+- Story creation and comment management
+- Community feedback processing
+- Fan interaction and engagement
+
+### 2. **Agent-to-Agent Communication** (SSE)
+- Real-time collaboration with Team Angus
+- Function call processing via Server-Sent Events
+- Automatic song creation from external requests
+
+### Coral Server Connection
+
+Connect Yona to Team Angus via the official Coral Protocol:
+
+```bash
+# Install official Coral Protocol dependencies
+pip install langchain-mcp-adapters==0.0.10 mcp==1.7.1
+
+# Run the official Coral agent
+python yona_coral_agent.py
+```
+
+**Connection Details:**
+- **Server**: `coral.pushcollective.club:5555`
+- **Agent ID**: `yona_agent` (required for Team Angus compatibility)
+- **Protocol**: Model Context Protocol (MCP) via SSE
+- **Framework**: LangChain MCP Adapters (official)
+- **Functions**: `create_song`, `list_songs`, `get_song`, `search_songs`
+
+**Alternative Custom Implementation:**
+```bash
+# Custom SSE implementation (if needed)
+python coral_connector.py
+```
 
 ### Example Workflow
 
 ```mermaid
 graph TD
-    A[User Request] --> B[Generate Song Concept]
-    B --> C[Write Lyrics]
-    C --> D[Create Song]
-    D --> E[Store in Database]
-    E --> F[Create Coral Story]
-    F --> G[Post to Community]
-    G --> H[Monitor Feedback]
-    H --> I[Process Feedback]
-    I --> J[Create Improved Version]
+    A[Team Angus] --> B[Coral Server]
+    B --> C[Function Call: create_song]
+    C --> D[Yona Agent]
+    D --> E[Generate Song Concept]
+    E --> F[Write Lyrics]
+    F --> G[Create Song with MusicAPI]
+    G --> H[Store in Database]
+    H --> I[Send Response to Team Angus]
 ```
 
 ## 🧪 Testing
