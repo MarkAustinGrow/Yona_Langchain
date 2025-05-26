@@ -78,7 +78,7 @@ class YonaLangChainAgent:
         self.agent = initialize_agent(
             tools=self.tools,
             llm=self.llm,
-            agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
+            agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
             verbose=self.verbose,
             memory=self.memory,
             handle_parsing_errors=True,
