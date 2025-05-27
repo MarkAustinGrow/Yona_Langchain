@@ -10,11 +10,10 @@ import json
 import logging
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain.prompts import ChatPromptTemplate
-from langchain.chat_models import init_chat_model
+from langchain_community.chat_models import init_chat_model
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain.tools import Tool
 from dotenv import load_dotenv
-from envio import ClosedResourceError
 import urllib.parse
 
 # Import Yona tools
@@ -173,9 +172,9 @@ async def main():
                 
                 await create_yona_agent(client, all_tools).ainvoke({})
                 
-        except ClosedResourceError as e:
+        except (ConnectionError, OSError, Exception) as e:
             attempt += 1
-            logger.error(f"ClosedResourceError on attempt {attempt}: {e}")
+            logger.error(f"Connection error on attempt {attempt}: {e}")
             if attempt < max_retries:
                 logger.info("Retrying in 5 seconds...")
                 await asyncio.sleep(5)
@@ -183,9 +182,6 @@ async def main():
             else:
                 logger.error("Max retries reached. Exiting.")
                 break
-        except Exception as e:
-            logger.error(f"Unexpected error: {e}")
-            break
 
 if __name__ == "__main__":
     asyncio.run(main())
