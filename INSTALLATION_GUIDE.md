@@ -27,9 +27,9 @@ pip install "cryptography>=39.0.0,<42.0"
 # LangChain ecosystem (in order)
 pip install langchain==0.1.20
 pip install langchain-core==0.1.53
-pip install langchain-community==0.0.39
+pip install langchain-community==0.0.38
 pip install langsmith==0.1.27
-pip install langchain-mcp==0.0.11
+pip install langchain-mcp==0.1.0
 
 # Core Yona dependencies
 pip install "openai>=1.17.0"
@@ -78,12 +78,12 @@ pip freeze > requirements.lock.txt
 ### **If LangChain Import Fails**
 ```bash
 pip uninstall langchain langchain-core langchain-community
-pip install langchain==0.1.20 langchain-core==0.1.53 langchain-community==0.0.39
+pip install langchain==0.1.20 langchain-core==0.1.53 langchain-community==0.0.38
 ```
 
 ### **If MCP Packages Missing**
 ```bash
-pip install langchain-mcp==0.0.11
+pip install langchain-mcp==0.1.0
 pip install mcp>=1.7.0
 ```
 
@@ -104,9 +104,9 @@ pip install fastapi>=0.110.0 uvicorn>=0.27.0
 After successful installation, your environment should have:
 - langchain==0.1.20
 - langchain-core==0.1.53
-- langchain-community==0.0.39
+- langchain-community==0.0.38
 - langsmith==0.1.27
-- langchain-mcp==0.0.11
+- langchain-mcp==0.1.0
 - fastapi>=0.110.0
 - uvicorn>=0.27.0
 - openai>=1.17.0
