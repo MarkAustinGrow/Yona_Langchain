@@ -5,38 +5,15 @@ uvicorn>=0.27.0
 # Cryptography & system deps
 cryptography>=39.0.0,<42.0
 
-# LangChain Ecosystem (MCP-Compatible Versions)
-langchain==0.1.21
+# LangChain Ecosystem (Confirmed Available Versions)
+langchain==0.1.20
 langchain-core==0.1.54
 langchain-community==0.0.39
 langsmith==0.1.27
 langchain-mcp==0.0.11
 
-# LangChain OpenAI integration
-langchain-openai>=0.0.8,<0.1.0
-
-# MCP Protocol support
-langchain-mcp-adapters>=0.0.10,<0.1.0
-mcp>=1.7.0,<2.0.0
-
 # Core Yona dependencies
 openai>=1.17.0
-pydantic>=1.10,<2.0         # LangChain still uses Pydantic v1
-supabase-py>=1.0.3          # Correct package name for Supabase
-python-dotenv>=1.0.0        # Environment variable loading
-
-# HTTP and async support (needed by Yona tools)
-httpx>=0.25.0,<0.26.0
-httpx-sse>=0.4.0,<0.5.0
-anyio>=4.9.0,<5.0.0
-requests>=2.31.0,<3.0.0
-
-# Additional utilities (used by existing Yona code)
-typing-extensions>=4.8.0
-flask>=3.0.0,<4.0.0         # Keep for backward compatibility
-
-# Development and testing
-pytest>=7.4.0,<8.0.0
-pytest-asyncio>=0.21.0,<0.22.0
-black>=23.11.0,<24.0.0
-flake8>=6.1.0,<7.0.0
+pydantic>=1.10,<2.0
+supabase-py>=1.0.3
+python-dotenv>=1.0.0
