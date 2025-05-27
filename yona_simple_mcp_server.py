@@ -52,14 +52,37 @@ class SimpleMCPServer:
         """Return list of available tools in MCP format."""
         tools_list = []
         for name, tool in self.tools.items():
+            # Handle LangChain tool schema properly
+            input_schema = {"type": "object", "properties": {}, "required": []}
+            
+            if hasattr(tool, 'args_schema') and tool.args_schema:
+                try:
+                    # If args_schema is a Pydantic model, get its schema
+                    if hasattr(tool.args_schema, 'schema'):
+                        schema = tool.args_schema.schema()
+                        input_schema["properties"] = schema.get('properties', {})
+                        input_schema["required"] = schema.get('required', [])
+                    elif hasattr(tool.args_schema, '__fields__'):
+                        # Handle Pydantic v1 style
+                        properties = {}
+                        required = []
+                        for field_name, field in tool.args_schema.__fields__.items():
+                            properties[field_name] = {
+                                "type": "string",  # Default to string
+                                "description": field.field_info.description or ""
+                            }
+                            if field.required:
+                                required.append(field_name)
+                        input_schema["properties"] = properties
+                        input_schema["required"] = required
+                except Exception:
+                    # Fallback to basic schema
+                    pass
+            
             tools_list.append({
                 "name": name,
                 "description": tool.description,
-                "inputSchema": {
-                    "type": "object",
-                    "properties": getattr(tool, 'args_schema', {}).get('properties', {}),
-                    "required": getattr(tool, 'args_schema', {}).get('required', [])
-                }
+                "inputSchema": input_schema
             })
         return tools_list
         
