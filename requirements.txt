@@ -7,7 +7,7 @@ cryptography>=39.0.0,<42.0
 
 # LangChain Ecosystem (Confirmed Available Versions)
 langchain==0.1.20
-langchain-core==0.1.54
+langchain-core==0.1.53
 langchain-community==0.0.39
 langsmith==0.1.27
 langchain-mcp==0.0.11
