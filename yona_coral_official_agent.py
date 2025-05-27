@@ -35,7 +35,7 @@ class YonaCoralOfficialAgent:
         self.coral_server_url = os.getenv('CORAL_SERVER_URL', 'http://coral.pushcollective.club:5555')
         self.application_id = os.getenv('CORAL_APPLICATION_ID', 'exampleApplication')
         self.privacy_key = os.getenv('CORAL_PRIVACY_KEY', 'privkey')
-        self.session_id = os.getenv('CORAL_SESSION_ID', 'session1')
+        self.session_id = os.getenv('CORAL_SESSION_ID', 'yona_session1')
         
         # Build MCP server URL following official pattern
         params = {
@@ -107,7 +107,7 @@ class YonaCoralOfficialAgent:
                 self.mcp_server_url,
                 headers=headers,
                 stream=True,
-                timeout=30
+                timeout=(10, None)  # 10s connection timeout, no read timeout for SSE
             )
             
             if response.status_code == 200:
