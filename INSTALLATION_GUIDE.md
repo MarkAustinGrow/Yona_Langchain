@@ -34,7 +34,7 @@ pip install langchain-mcp==0.0.11
 # Core Yona dependencies
 pip install "openai>=1.17.0"
 pip install "pydantic>=1.10,<2.0"
-pip install supabase-py>=1.0.3
+pip install supabase>=2.3.0
 pip install "python-dotenv>=1.0.0"
 ```
 
