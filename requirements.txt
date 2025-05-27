@@ -1,34 +1,41 @@
-# Core LangChain dependencies
-langchain>=0.1.0,<0.2.0
-langchain-openai>=0.0.5,<0.1.0
-langchain-community>=0.0.10,<0.1.0
-langchain-core>=0.1.0,<0.2.0
+# Coordinated LangChain ecosystem (tested compatible versions)
+langchain==0.1.22
+langchain-core==0.1.54
+langchain-community==0.0.39
+langsmith==0.1.27
 
-# Existing Yona dependencies
+# LangChain OpenAI integration
+langchain-openai>=0.0.8,<0.1.0
+
+# MCP (Model Context Protocol) support
+langchain-mcp==0.0.11
+langchain-mcp-adapters>=0.0.10,<0.1.0
+mcp>=1.7.0,<2.0.0
+
+# Core Yona dependencies
 openai>=1.6.1,<2.0.0
-httpx>=0.25.0,<0.26.0
 python-dotenv>=1.0.0
 supabase>=2.3.0,<3.0.0
-flask>=3.0.0,<4.0.0
 
-# Cryptography for DID management (relaxed for server compatibility)
+# Cryptography (relaxed for server compatibility)
 cryptography>=39.0.0,<42.0.0
-
-# Additional utilities
-requests>=2.31.0,<3.0.0
-pydantic>=2.5.0,<3.0.0
-typing-extensions>=4.8.0
-
-# Coral Protocol Official Integration
-langchain-mcp-adapters>=0.0.10,<0.1.0
-langchain-mcp>=0.1.0,<0.3.0
-mcp>=1.7.0,<2.0.0
-httpx-sse>=0.4.0,<0.5.0
-anyio>=4.9.0,<5.0.0
 
 # FastAPI for OpenAI-compatible wrapper
 fastapi>=0.104.0,<0.105.0
 uvicorn>=0.24.0,<0.25.0
+
+# HTTP and async support
+httpx>=0.25.0,<0.26.0
+httpx-sse>=0.4.0,<0.5.0
+anyio>=4.9.0,<5.0.0
+
+# Data handling
+pydantic>=2.5.0,<3.0.0
+requests>=2.31.0,<3.0.0
+
+# Optional dependencies (keep existing functionality)
+flask>=3.0.0,<4.0.0
+typing-extensions>=4.8.0
 
 # Development and testing
 pytest>=7.4.0,<8.0.0
