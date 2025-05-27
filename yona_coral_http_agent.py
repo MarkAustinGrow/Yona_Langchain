@@ -56,11 +56,11 @@ class YonaCoralHttpAgent:
     def discover_tools(self) -> List[Dict[str, Any]]:
         """Discover available tools from the HTTP wrapper"""
         try:
-            response = self.http_session.get(f"{self.http_wrapper_url}/v1/agent/tools", timeout=10)
+            response = self.http_session.get(f"{self.http_wrapper_url}/capabilities", timeout=10)
             
             if response.status_code == 200:
-                tools_data = response.json()
-                self.tools = tools_data.get('tools', [])
+                capabilities_data = response.json()
+                self.tools = capabilities_data.get('tools', [])
                 logger.info(f"Discovered {len(self.tools)} tools from HTTP wrapper")
                 return self.tools
             else:
@@ -74,14 +74,9 @@ class YonaCoralHttpAgent:
     def call_tool(self, tool_name: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
         """Call a tool via the HTTP wrapper"""
         try:
-            payload = {
-                "tool": tool_name,
-                "parameters": parameters
-            }
-            
             response = self.http_session.post(
-                f"{self.http_wrapper_url}/v1/agent/tools/execute",
-                json=payload,
+                f"{self.http_wrapper_url}/tools/{tool_name}",
+                json=parameters,
                 timeout=30
             )
             
@@ -240,7 +235,7 @@ Respond naturally and helpfully. If you need to use tools, explain what you're d
             
             # Check HTTP wrapper availability
             try:
-                response = self.http_session.get(f"{self.http_wrapper_url}/v1/agent/tools", timeout=5)
+                response = self.http_session.get(f"{self.http_wrapper_url}/health", timeout=5)
                 if response.status_code != 200:
                     logger.error(f"HTTP wrapper not available at {self.http_wrapper_url}")
                     return False
