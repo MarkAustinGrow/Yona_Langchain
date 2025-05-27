@@ -41,7 +41,7 @@ class CoralHttpClient:
                 "agentDescription": agent_description
             }
             query_string = urlencode(params)
-            registration_url = f"{self.coral_server_url}/devmode/{self.application_id}/{self.privacy_key}/{self.session_id}/register?{query_string}"
+            registration_url = f"{self.coral_server_url}/devmode/{self.application_id}/{self.privacy_key}/{self.session_id}/sse?{query_string}"
             
             logger.info(f"Registering agent '{agent_id}' with Coral Protocol")
             logger.info(f"Registration URL: {registration_url}")
