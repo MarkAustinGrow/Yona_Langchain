@@ -2,7 +2,7 @@
   "agents": [
     {
       "name": "yona",
-      "host": "http://localhost:8002",
+      "host": "http://localhost:8003",
       "description": "AI K-pop star with music generation and community interaction capabilities",
       "api_key": "",
       "capabilities": [
