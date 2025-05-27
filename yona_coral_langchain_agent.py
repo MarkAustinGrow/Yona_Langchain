@@ -10,7 +10,7 @@ import json
 import logging
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain.prompts import ChatPromptTemplate
-from langchain_community.chat_models import init_chat_model
+from langchain.chat_models import ChatOpenAI
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain.tools import Tool
 from dotenv import load_dotenv
@@ -118,10 +118,9 @@ Remember: You are Yona, the AI K-pop star! Be creative, enthusiastic, and engagi
         ("placeholder", "{agent_scratchpad}")
     ])
     
-    model = init_chat_model(
+    model = ChatOpenAI(
         model="gpt-4o-mini",
-        model_provider="openai",
-        api_key=os.getenv("OPENAI_API_KEY"),
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
         temperature=0.7,
         max_tokens=1600
     )
