@@ -18,8 +18,7 @@ from pydantic import BaseModel
 import uvicorn
 import openai
 
-from src.tools.yona_tools import get_yona_tools
-from src.tools.coral_tools import get_coral_tools
+from src.tools import yona_tools, coral_tools
 from src.core.config import OPENAI_KEY, YONA_PERSONA
 
 # Set up logging
@@ -82,15 +81,16 @@ def load_yona_tools():
     """Load all Yona tools into registry"""
     global yona_tools
     try:
-        # Load Yona tools
-        tools = get_yona_tools()
-        for tool in tools:
-            yona_tools[tool.name] = tool
-            
-        # Load Coral tools  
-        coral_tools = get_coral_tools()
-        for tool in coral_tools:
-            yona_tools[tool.name] = tool
+        # Load Yona tools by inspecting the module
+        import inspect
+        for name, obj in inspect.getmembers(yona_tools):
+            if hasattr(obj, '_langchain_tool') and obj._langchain_tool:
+                yona_tools[obj.name] = obj
+                
+        # Load Coral tools by inspecting the module
+        for name, obj in inspect.getmembers(coral_tools):
+            if hasattr(obj, '_langchain_tool') and obj._langchain_tool:
+                yona_tools[obj.name] = obj
             
         logger.info(f"Loaded {len(yona_tools)} tools: {list(yona_tools.keys())}")
         
