@@ -240,7 +240,7 @@ Respond naturally and helpfully. If you need to use tools, explain what you're d
             
             # Check HTTP wrapper availability
             try:
-                response = self.http_session.get(f"{self.http_wrapper_url}/v1/agent/status", timeout=5)
+                response = self.http_session.get(f"{self.http_wrapper_url}/v1/agent/tools", timeout=5)
                 if response.status_code != 200:
                     logger.error(f"HTTP wrapper not available at {self.http_wrapper_url}")
                     return False
