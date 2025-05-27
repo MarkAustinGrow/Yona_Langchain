@@ -2,6 +2,7 @@
 langchain==0.1.0
 langchain-openai==0.0.5
 langchain-community==0.0.10
+langchain-core==0.1.0
 
 # Existing Yona dependencies
 openai==1.6.1
@@ -20,9 +21,14 @@ typing-extensions==4.8.0
 
 # Coral Protocol Official Integration
 langchain-mcp-adapters==0.0.10
+langchain-mcp==0.0.10
 mcp==1.7.1
 httpx-sse==0.4.0
 anyio==4.9.0
+
+# FastAPI for OpenAI-compatible wrapper
+fastapi==0.104.1
+uvicorn==0.24.0
 
 # Development and testing
 pytest==7.4.3

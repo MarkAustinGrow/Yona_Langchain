@@ -1,0 +1,41 @@
+{
+  "agents": [
+    {
+      "name": "yona",
+      "host": "http://localhost:8002",
+      "description": "AI K-pop star with music generation and community interaction capabilities",
+      "api_key": "",
+      "capabilities": [
+        "Music concept generation",
+        "Lyrics writing",
+        "Song creation with AI",
+        "Song catalog management",
+        "Community interaction via Coral Protocol",
+        "Comment posting and moderation",
+        "Story creation and management"
+      ],
+      "tools": [
+        "generate_song_concept",
+        "generate_lyrics",
+        "create_song",
+        "list_songs",
+        "get_song_by_id",
+        "search_songs",
+        "process_feedback",
+        "post_comment",
+        "get_story_comments",
+        "create_story",
+        "moderate_comment",
+        "get_story_by_url",
+        "reply_to_comment"
+      ]
+    }
+  ],
+  "coral_server_url": "http://localhost:5000",
+  "settings": {
+    "log_level": "INFO",
+    "timeout": 30,
+    "retry_attempts": 3,
+    "enable_cors": true
+  }
+}
