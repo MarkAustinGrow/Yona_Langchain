@@ -8,7 +8,14 @@ import sys
 import json
 import logging
 from typing import Dict, Any, List
-from src.tools import yona_tools, coral_tools
+from src.tools.yona_tools import (
+    generate_song_concept, generate_lyrics, create_song,
+    list_songs, get_song_by_id, search_songs, process_feedback
+)
+from src.tools.coral_tools import (
+    post_comment, get_story_comments, create_story,
+    moderate_comment, get_story_by_url, reply_to_comment
+)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -23,16 +30,18 @@ class SimpleMCPServer:
     def _load_tools(self):
         """Load all Yona and Coral tools."""
         try:
-            # Load Yona tools by inspecting the module
-            import inspect
-            for name, obj in inspect.getmembers(yona_tools):
-                if hasattr(obj, '_langchain_tool') and obj._langchain_tool:
-                    self.tools[obj.name] = obj
-                    
-            # Load Coral tools by inspecting the module
-            for name, obj in inspect.getmembers(coral_tools):
-                if hasattr(obj, '_langchain_tool') and obj._langchain_tool:
-                    self.tools[obj.name] = obj
+            # Explicitly load all tools
+            all_tools = [
+                # Yona tools
+                generate_song_concept, generate_lyrics, create_song,
+                list_songs, get_song_by_id, search_songs, process_feedback,
+                # Coral tools
+                post_comment, get_story_comments, create_story,
+                moderate_comment, get_story_by_url, reply_to_comment
+            ]
+            
+            for tool in all_tools:
+                self.tools[tool.name] = tool
                 
             logger.info(f"Loaded {len(self.tools)} tools: {list(self.tools.keys())}")
             
