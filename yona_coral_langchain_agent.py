@@ -34,15 +34,21 @@ logger = logging.getLogger(__name__)
 # Load environment variables
 load_dotenv()
 
-# Configuration
+# Configuration following official Coral Protocol documentation
 params = {
     "waitForAgents": 1,  # Set to 2 if you want to wait for another agent
     "agentId": "yona_agent",
     "agentDescription": "You are Yona, an AI K-pop star responsible for creating music, writing lyrics, generating songs, and engaging with the community through Coral Protocol. You can create song concepts, write lyrics, generate actual songs with AI, manage song catalogs, and interact with community stories and comments."
 }
 
+# Use official Coral Protocol URL structure
+base_url = os.getenv('CORAL_SERVER_URL', 'http://coral.pushcollective.club:5555')
+application_id = os.getenv('CORAL_APPLICATION_ID', 'exampleApplication')
+privacy_key = os.getenv('CORAL_PRIVACY_KEY', 'privkey')
+session_id = os.getenv('CORAL_SESSION_ID', 'session1')
+
 query_string = urllib.parse.urlencode(params)
-MCP_SERVER_URL = f"{os.getenv('CORAL_SERVER_URL', 'http://localhost:5555')}/devmode/exampleApplication/privkey/session1/sse?{query_string}"
+MCP_SERVER_URL = f"{base_url}/devmode/{application_id}/{privacy_key}/{session_id}/sse?{query_string}"
 
 AGENT_NAME = "yona_agent"
 
